@@ -1,0 +1,224 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    
+
+}
+
+
+header {
+    height: 117px;
+    position: relative;
+    overflow: hidden;
+    z-index: 21;
+}
+
+.header_container {
+
+    height: 80px;
+    background-color: #508C9B;
+    border-bottom: 5px solid #134B70;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow-y: hidden;
+
+    .header_title {
+        color: #E2E2B6;
+        background-color: #021526;
+
+        display: flex;
+        align-items: center;
+
+        width: 300px;
+        height: 300px;
+        margin-top: -120px;
+        margin-left: -120px;
+
+        border-radius: 6000px;
+
+        padding-left: 130px;
+        padding-top: 120px;
+        box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.25);
+        border: 3px solid #E2E2B6;
+    }
+}
+
+nav {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+
+    a {
+        overflow: hidden;
+        display: flex;
+        margin-inline: 2px;
+        width: 50px;
+        height: 90px;
+        background-color: #134B70;
+        border-radius: 0 0 40px 40px;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #E2E2B6;
+        border-width: 0 0 2px 2px;
+        color: white;
+
+        box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.25);
+        transition: all .125s 0s linear;
+
+        
+        svg{
+            position: absolute;
+            fill: #E2E2B6;
+            height: 40px;
+            width: 40px;
+        }
+
+        .paper{
+            height: 55px;
+            width: 55px;
+            fill: #E2E2B6;
+        }
+    }
+    a:hover {
+        height: 110px;
+    }
+    
+}
+
+/* ------------------------------------------------- */
+
+footer {
+    z-index: 20;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* background-color: red; */
+
+    .footer_left {
+
+        position: relative;
+        width: 250px;
+        height: 50px;
+        background-color: #021526;
+        border-top: 1px solid #E2E2B6;
+        border-radius: 0px 35px 0px 0px;
+        color: #E2E2B6;
+
+        display: flex;
+        align-items: center;
+
+        .point {
+            position: absolute;
+            background-color: #E2E2B6;
+            border-radius: 1000px;
+            width: 10px;
+            height: 10px;
+            top: 15px;
+            right: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            color: #E2E2B6;
+            margin-left: 30px;
+        }
+
+        .point::after {
+            content: "";
+            display: block;
+            position: relative;
+            width: 25px;
+            height: 19px;
+            background-color: #021526;
+            bottom: -15px;
+            right: -24px;
+        }
+    }
+
+    .footer_left::after {
+        content: "";
+        height: 50px;
+        width: 50px;
+        background-color: #ffffff;
+        border-radius: 1110px;
+        position: inherit;
+        right: -54px;
+    }
+/* ------------------------------------------------- */
+
+
+    .footer_right {
+        padding: 0 20px;
+        position: relative;
+        width: 200px;
+        height: 50px;
+        background-color: #021526;
+        border-top: 1px solid #E2E2B6;
+        border-radius: 35px 0px 0px 0px ;
+
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            color: #E2E2B6;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px ;
+        }
+
+        .point {
+            position: absolute;
+            background-color: #E2E2B6;
+            border-radius: 1000px;
+            width: 10px;
+            height: 10px;
+            top: 15px;
+            left: 15px;
+        }
+
+        .point::after {
+            content: "";
+            display: block;
+            position: relative;
+            width: 25px;
+            height: 19px;
+            background-color: #021526;
+            bottom: -15px;
+            left: -33px;
+            z-index: 0;
+        }
+    }
+
+    .footer_right::before {
+        content: "";
+        height: 50px;
+        width: 50px;
+        background-color: #ffffff;
+        border-radius: 1110px;
+        position: absolute;
+        left: -49px;
+        /* left: -71px; */
+        z-index: 1;
+    }
+
+    
+    svg{
+        fill: #E2E2B6;
+    }
+}
+

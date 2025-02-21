@@ -1,0 +1,21 @@
+.login_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+
+
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+    left: calc(50% - 325px);
+    padding-top: 100px;
+
+
+
+    min-width:650px;
+    height: 550px;
+
+}

@@ -1,0 +1,169 @@
+/*  profaile ------------------------------------------------ */
+
+
+.profail_container{
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+    left: calc(50% - 325px);
+    padding-top: 100px ;
+
+    max-width: fit-content;
+    min-width:650px;
+    height: 550px;
+
+    background: linear-gradient(-45deg ,#134B70 ,  #021526 80%) ;
+    color: #E2E2B6;
+
+    border-radius: 30px;
+    background-clip: border-box;
+
+
+    .more_info{
+        height: fit-content;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: all 1s ease;
+    }
+    .more_info:hover{
+        transform : rotate(360deg);
+        transition-delay:  .5s;
+    }
+
+    img{
+        border-radius: 1000px;
+        border: 2px solid #E2E2B6;
+        height: 250px;
+        width: 250px;
+        background-color: #508C9B;
+    }
+
+    .img_container::before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        top: 13px;
+        left: 21px;
+        border-radius: 999px;
+        background-color: #021526 ;
+        z-index: 2;
+    }
+
+    .img_container::after{
+        content: '';
+        position: absolute;
+        display: block;
+        left: 10px;
+        top: 10px;
+        width: 80px;
+        height: 80px;
+        border-radius: 999px;
+        background-color: #E2E2B6;
+    }
+
+    .profail_container_info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+        width: 300px;
+        text-align: center;
+        flex-wrap: wrap;
+        h1{
+            max-width: 300px;
+            max-height: 100px;
+            overflow: hidden;
+            display: block;
+            font-size: 40px;
+        }
+
+        button{
+            margin-top: 30px ;
+            border: 1px solid #508C9B;
+            border-bottom-color: #90e9ff;
+            border-right-color: #31c3e7;
+            background-color: #134B70;
+            color: #ffffff;
+            border-radius: 40px;
+            width: 200px;
+            height: 50px;
+            font-size: 20px;
+            transition: all 0.25s ease;
+        }
+
+        button:hover{
+            margin: 25px 0 3px 0;
+            width: 205px;
+            height: 54px;
+            font-size: 22px;
+        }
+    }
+    .profail_container_info::after{
+        content: '';
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 999px;
+        background-color: #E2E2B6;
+        box-shadow: -1px -1px 20px 1px  #e2e2b685;
+    }
+   
+}
+
+.profail_container_form{
+        display: flex;
+        flex-direction: column;
+        padding:0 20px;
+        font-size: 24px;
+        position: absolute;
+        left: calc(50% - 325px);
+        padding-top: 100px ;
+    
+        max-width: fit-content;
+        min-width:650px;
+        height: 550px;
+    
+        background: linear-gradient(135deg ,#134B70 ,  #021526 80%) ;
+        color: #E2E2B6;
+    
+        border-radius: 30px;
+        background-clip: border-box;
+
+        input{
+            margin-bottom: 30px;
+            padding-inline: 30px;
+            border: 1px solid #508C9B;
+            border-bottom-color: #90e9ff;
+            border-right-color: #31c3e7;
+            background-color: #134B70;
+            color: #ffffff;
+            border-radius: 40px;
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            transition: all 0.25s ease;
+
+        }
+        input:focus{
+            outline: none;
+        }
+        button{
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            bottom: 50px ;
+            left: calc(50% - 100px);
+            border: 1px solid #31c3e7 ;
+            color: #31c3e7;
+            border-radius: 40px;
+            background-color: #021526;
+        }
+    
+}
