@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products ;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User ;
 
 
@@ -25,25 +26,16 @@ class productsController extends Controller
      */
     public function create(Request $request)
     {
-        $user = $request->session()->get('user_login') ;
-        if($user){
-            return view('products.createProduct' , compact('user'));
-        }else{
-            return redirect()->route('LoginFrom');
-        }
+        $user = Auth::user();
+        return view('products.createProduct' , compact('user'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $user = $request->session()->get('user_login');
-
-        if(!$user){
-            return redirect()->route('user.login');//with error ...
-        }
-
+    {        
         $validateData = $request->validate([
             'img' => 'required|mimes:jpeg,jpg,png,gif' ,
             "price" => 'nullable|numeric' ,
@@ -56,7 +48,7 @@ class productsController extends Controller
         $img->move(public_path('img') , $img_name) ;
 
         Products::create([
-            "oner_id" => $user->user_id ,
+            "oner_id" => Auth::user()->user_id ,
             "command_id" => null ,
 
             "img" => $img_name,
@@ -90,7 +82,7 @@ class productsController extends Controller
         $route = $request->route ;
         $product = Products::findOrFail($id);
 
-        $user = $request->session()->get('user_login') ;
+        $user = Auth::user() ;
         if($user){
             return view('products.updateProduct' , compact('product' , 'user'  , 'route')) ;
         }else{
@@ -138,7 +130,7 @@ class productsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request ,string $id)
+    public function destroy(string $id)
     {
        $product = Products::findOrFail($id) ;
        $product->delete() ;
@@ -146,9 +138,9 @@ class productsController extends Controller
 
    }
    
-    public function purcheses(Request $request)
+    public function purcheses()
     {
-        $user = $request->session()->get('user_login') ;
+        $user = Auth::user() ;
         if($user){
             $products = Products::where('oner_id' , $user->user_id)->get() ;
             return view('products.purcheses' , compact('products')) ;

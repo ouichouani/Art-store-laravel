@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\commandsController;
 use App\Http\Controllers\usersController;
 use App\Http\Controllers\productsController;
+use App\Http\Middleware\CRUDProductsMiddleware ;
 
 
 
@@ -20,7 +21,7 @@ Route::resource('user', usersController::class);
 
 // -----------------------------------------------------------------------------------------------------
 
-Route::resource('product', productsController::class);
+Route::resource('product', productsController::class)->middleware(CRUDProductsMiddleware::class);
 Route::get('purcheses', [productsController::class , 'purcheses'])->name('product.purcheses') ;
 
 

@@ -58,40 +58,37 @@ class usersController extends Controller
         ]);
 
         $user = User::firstWhere('email' , $request->input('email') );
-        $id = $user->id ;
-
+        $id = $user->user_id ;
+        Auth::login($user);
+        
         return redirect()->route('user.show' , $id) ; //here we need $user
     }
 
-    public function show(Request $request ,$id) //it need the id session
+    public function show($id) //it need the id session
     {
-            $user = User::findOrFail($id) ;
-            return view('users.profaile', compact('user')) ;
+        $user = Auth::user() ;
+        return view('users.profaile', compact('user')) ;
     }
     
-    public function edit(string $id) //it need the id session
+    public function edit() //it need the id session
     {
-        $user = User::findOrFail($id) ;
+        $user = Auth::user() ;
         return view('users.edit' , compact('user')) ;
     }
 
-    public function update(Request $request, string $id) // delet the old picture when we change it
+    public function update(Request $request) // delet the old picture when we change it
     {   
-        $user = User::findOrFail($id) ;
+        $user = User::findOrFail(Auth::user()->user_id) ;
         $datavalidation = $request->validate([
             'name_input' => 'required|max:255|min:3' ,
             'password_input' => 'required|max:255|min:3' ,
             'img_input' => 'nullable|mimes:jpeg,png,jpg,gif' ,
         ]);
 
-
-        if($user){
+        if(Auth::check()){
 
             $user->name = $datavalidation['name_input'] ;
-
-            if(!empty($datavalidation['password_input'])){
-                $user->password = $datavalidation['password_input'] ;
-            }
+            if(!empty($datavalidation['password_input'])){$user->password = $datavalidation['password_input'] ;}
 
             if($request->hasFile('img_input')){
 
@@ -100,10 +97,7 @@ class usersController extends Controller
                 $request->img_input->move(public_path('img' ),$nameImg);
                 $user->img = $nameImg ;
                     
-            }elseif(is_null($request->input('keep_img'))){
-                $user->img = 'default.jpg' ;
-            }
-
+            }elseif(is_null($request->input('keep_img'))){$user->img = 'default.jpg' ;}
             $user->save();
             return redirect()->route('user.show' , $user)->with("success" , 'the update was succesful');
         }
@@ -123,18 +117,16 @@ class usersController extends Controller
 
     public function login(Request $request)
     {
-         //here we will create the user session
         $dataValidation = $request->validate([
             'email' => 'required|email', 
             'password' => 'required',
         ]);
 
-
         $user = User::firstWhere('email', $dataValidation['email']) ;
         if($user){
             if($user->password === $dataValidation['password']){
-                $request->session()->put('user_login' , $user) ;
-                return redirect()->route('user.show' , $user) ; //??
+                Auth::login($user);
+                return redirect()->route('user.show' , $user) ; 
             }else{
                 return redirect()->route('LoginFrom')->with('error' , 'incorrect password')->withInput();
             }
@@ -145,15 +137,13 @@ class usersController extends Controller
     
     public function logout(Request $request) 
     {
-        //her we will destroy the user session
-        $request->session()->forget('user_login');
+        Auth::logout() ;        
         return view('users.login') ;
     }
 
-    public function info($user) 
+    public function info() 
     {
-        // show user information 
-        $user = User::findOrFail($user) ;
+        $user = Auth::user();
         return view('users.info' , compact('user')) ;
     }
 

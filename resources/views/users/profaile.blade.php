@@ -21,7 +21,7 @@
             <h1>{{($user->gender ? "Mr " : "Ms ") . $user->name }}</h1>
             <h3>{{$user->email}}</h3>
 
-            @if(session()->get('user_login') == $user)
+            @if(Auth::user() == $user)
 
             <form action= "{{route('user.edit' , $user)}}" class="profail_container_update" id="profail_container_update_button"> 
                 @csrf

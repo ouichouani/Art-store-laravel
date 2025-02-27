@@ -9,11 +9,10 @@
                 {!! file_get_contents(public_path('svg/home.svg')) !!}
             </a>
             {{-----------------------------------------------------}}
-            @if(session('user_login'))
-            <a href={{route('user.show' , session('user_login'))}} title ="account" class="account">
+            @if(Auth::check())
+            <a href={{route('user.show' , Auth::user())}} title ="account" class="account">
                 {!! file_get_contents(public_path('svg/account.svg')) !!}
             </a>          
-      
             @else
             <a href={{route('LoginFrom')}} title ="account" class="account">
                 {!! file_get_contents(public_path('svg/account.svg')) !!}

@@ -18,7 +18,7 @@
 
     {{-- --------------------------------------------------------------- --}}
 
-    @if(!(session('user_login')?->user_id == $product->oner_id))
+    @if(!(Auth::user()->user_id == $product->oner_id))
         <form >
             @csrf
             {{-- about commands --}}
