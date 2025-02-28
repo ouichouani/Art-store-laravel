@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 
-class commands extends Model
+class Commands extends Model
 {
     use HasFactory ;
 
@@ -17,6 +17,7 @@ class commands extends Model
         "oner_id" ,
         "vendor_id" ,
         "confirmed" ,
+        "product_id",
     ];
 
     protected $table = 'commands' ;

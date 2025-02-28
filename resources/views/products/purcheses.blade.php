@@ -18,6 +18,14 @@
         <button type="submit">update</button>
     </form> --}}
     @endforeach
+    @foreach ($purcheses as $purchese )
+        <form action="{{route('product.show' , $purchese->product_id)}}" method="GET" onclick="submit()" style="border: 1px solid red">
+            <img src="{{asset('img/' . $purchese->img)}}" alt="" style="width: 200px ;">
+            <p> {{$purchese->title}} </p>
+            <p> {{$purchese->price}} </p>
+            <p> {{$purchese->created_at}}</p>
+        </form>
+    @endforeach
 </div>
 
 @endsection

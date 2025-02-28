@@ -2,6 +2,14 @@
 
 @section('content')
 
+<div class="notification">
+    <p style="background-color: rgb(57, 255, 47)"> {{session('success')}}</p>
+    <p style="background-color: rgb(255, 200, 47)"> {{session('error')}}</p>
+</div>
+
+    
+
+
 <div class="profuct">
     <span class="price">{{$product->price}} $</span>
     <img src="{{asset('img/' .$product->img)}}" alt="profail_img" style="width: 100px">
@@ -17,25 +25,28 @@
     <p class="description">{{$product->description}}</p>
 
     {{-- --------------------------------------------------------------- --}}
-
-    @if(!(Auth::user()->user_id == $product->oner_id))
-        <form >
-            @csrf
-            {{-- about commands --}}
-            <button type="submit">buy</button> 
-        </form>
-    @else
-        <form action="{{route('product.edit' , $product)}}" method="grt">
-            @csrf
-            <input type="hidden" value="product.show" name="route">
-            <button type="submit">update</button> 
-        </form>
-        <form action="{{route('product.destroy' , $product)}}" method="post">
-            @csrf
-            @method('DELETE')
-            <input type="hidden" value="product.show" name="route">
-            <button type="submit">delete</button>
-        </form>
+    @if(Auth::check())
+        @if(!(Auth::user()->user_id == $product->oner_id))
+            <form action="{{route('commands.store')}}" method="POST">
+                @csrf
+                {{-- about commands --}}
+                <input type="hidden" value="{{$product->oner_id}}" name="oner">
+                <input type="hidden" value="{{$product->product_id}}" name="product">
+                <button type="submit">buy</button> 
+            </form>
+        @else
+            <form action="{{route('product.edit' , $product)}}" method="grt">
+                @csrf
+                <input type="hidden" value="product.show" name="route">
+                <button type="submit">update</button> 
+            </form>
+            <form action="{{route('product.destroy' , $product)}}" method="post">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" value="product.show" name="route">
+                <button type="submit">delete</button>
+            </form>
+        @endif
     @endif
     
 

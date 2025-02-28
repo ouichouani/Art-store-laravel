@@ -21,13 +21,18 @@ Route::resource('user', usersController::class);
 
 // -----------------------------------------------------------------------------------------------------
 
-Route::resource('product', productsController::class)->middleware(CRUDProductsMiddleware::class);
+Route::resource('product', productsController::class)->except(['index' , 'show'])->middleware(CRUDProductsMiddleware::class);
+
+Route::get('product', [productsController::class , 'index'])->name('product.index');//except this route so i can use the middleware 
+Route::get('product/{id}', [productsController::class , 'show'])->name('product.show');//except this route so i can use the middleware 
+
 Route::get('purcheses', [productsController::class , 'purcheses'])->name('product.purcheses') ;
 
+// -----------------------------------------------------------------------------------------------------
 
 
-
-
+Route::resource('commands' , commandsController::class)->except(['store']) ;
+Route::post('commands/store' , [commandsController::class , 'store'])->name('commands.store') ;
 
 
 

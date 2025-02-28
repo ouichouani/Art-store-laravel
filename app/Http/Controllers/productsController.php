@@ -143,7 +143,8 @@ class productsController extends Controller
         $user = Auth::user() ;
         if($user){
             $products = Products::where('oner_id' , $user->user_id)->get() ;
-            return view('products.purcheses' , compact('products')) ;
+            $purcheses = DB::select('select p.* , c.* from products p join commands c on p.product_id = c.product_id where vendor_id = ?' , [Auth::user()->user_id]) ;
+            return view('products.purcheses' , compact('products' , 'purcheses')) ;
         }else{
             return redirect()->route('LoginFrom') ; 
         }

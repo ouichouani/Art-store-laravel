@@ -23,11 +23,11 @@
             <a href={{route('product.index')}} title ="my products" class="my_products">
                 {!! file_get_contents(public_path('svg/store.svg')) !!}
             </a>
-            {{-- <a href={{route('sing_up')}} title ="my commands" class="my_commands" >
+            <a href={{route('commands.index')}} title ="my commands" class="my_commands" >
                 {!! file_get_contents(public_path('svg/paper.svg')) !!}
             </a>
-            <a href={{route('account')}} title ="my purcheses" class="my_purcheses">
-                {!! file_get_contents(public_path('svg/basket.svg')) !!} --}}
+            <a href={{route('product.purcheses')}} title ="my purcheses" class="my_purcheses">
+                {!! file_get_contents(public_path('svg/basket.svg')) !!}
             </a>
         </nav>
     
