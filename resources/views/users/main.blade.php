@@ -2,8 +2,9 @@
 
 @section('content')
 
-    {{-- <h2>{{$users}}</h2> --}}
-    @foreach($users as $user)
+
+
+@foreach($users as $user)
         <div class="card">
             <ul>
                 <li>{{$user->name}}</li>

@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\products ;
 use App\Models\User ;
-use App\Models\commands ;
 
 
 /**
@@ -25,7 +24,7 @@ class ProductsFactory extends Factory
     {
         return [
             "oner_id" => User::factory(),
-            "command_id" => commands::factory(),
+
             "img"   => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGjCPHh5ztTbRSczjKuVYKJU44nmhEiXQXsA&s' ,
             "price"   =>$this->faker->numberBetween(10 , 1000) ,
             "title"   =>$this->faker->sentence() ,

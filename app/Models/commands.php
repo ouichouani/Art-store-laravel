@@ -12,6 +12,7 @@ class Commands extends Model
 {
     use HasFactory ;
 
+    protected $primaryKey = 'command_id' ; 
     
     protected $fillable =[
         "oner_id" ,

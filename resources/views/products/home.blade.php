@@ -7,6 +7,8 @@
 
 @section('content')
 
+
+
     @foreach($products as $product)
 
         @if($product->to_sell)

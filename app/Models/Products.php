@@ -9,11 +9,14 @@ class Products extends Model
 {
 
     use HasFactory ;
+
     protected $primaryKey = 'product_id' ;
+    public $incrementing = true; // Ensures it auto-increments
+    protected $keyType = 'int'; 
+
     protected $fillable =[
 
         "oner_id",
-        "command_id",
 
         "img" ,
         "price" ,

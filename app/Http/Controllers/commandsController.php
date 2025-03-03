@@ -14,7 +14,6 @@ class commandsController extends Controller
     public function index()
     {
         $commands = DB::select('SELECT C.*, U.*, P.* , P.img as product_img , U.img as user_img FROM commands C INNER JOIN users U ON U.user_id = C.vendor_id INNER JOIN products P ON P.product_id = C.product_id WHERE C.oner_id = ?', [Auth::user()->user_id]) ;
-        // dd($commands);
         return view('commands.commands_page', compact('commands'));
     }
 
@@ -41,9 +40,9 @@ class commandsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function validation(string $id)
     {
-        //
+        dd('hello') ;
     }
 
     /**

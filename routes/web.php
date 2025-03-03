@@ -12,10 +12,11 @@ Route::get('/', function(){
     return view('parties.home') ;
 })->name('home') ;
 
-Route::get('user/LoginFrom' , [usersController::class , 'LoginFrom'])->name('LoginFrom') ;
-Route::post('user/login' , [usersController::class , 'login'])->name('user.login') ;
-Route::post('user/logout' , [usersController::class , 'logout'])->name('user.logout') ;
-Route::get('user/{user}/info' , [usersController::class , 'info'])->name('user.info') ;
+Route::get('user/LoginFrom'   , [usersController::class , 'LoginFrom'])->name('LoginFrom')      ;
+Route::get('user/usersList'   , [usersController::class , 'LoginFrom'])->name('user.usersList') ;
+Route::post('user/login'      , [usersController::class , 'login']    )->name('user.login')     ;
+Route::post('user/logout'     , [usersController::class , 'logout']   )->name('user.logout')    ;
+Route::get('user/{user}/info' , [usersController::class , 'info']     )->name('user.info')      ;
 
 Route::resource('user', usersController::class);
 
@@ -33,6 +34,7 @@ Route::get('purcheses', [productsController::class , 'purcheses'])->name('produc
 
 Route::resource('commands' , commandsController::class)->except(['store']) ;
 Route::post('commands/store' , [commandsController::class , 'store'])->name('commands.store') ;
+Route::post('commands/validation/{id}' , [commandsController::class , 'validation'])->name('commands.validation') ;
 
 
 

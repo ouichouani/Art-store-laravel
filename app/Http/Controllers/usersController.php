@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomMail;
+use App\Mail\DeleteAccountMail;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User ;
+use Illuminate\Support\Facades\Mail;
 
 class usersController extends Controller
 {
 
     public function index(Request $request) // i will use this to display all users to admin
     {
-        $user = $request->session()->get('user_login');
-        if(!is_null($user)){
+        $user = Auth::user();
+        if(Auth::check()){
             if($user->is_admin){
                 $users = User::all() ;
                 return view('users.main', compact('users')); 
@@ -60,7 +64,7 @@ class usersController extends Controller
         $user = User::firstWhere('email' , $request->input('email') );
         $id = $user->user_id ;
         Auth::login($user);
-        
+        Mail::to($user->email)->send(new WelcomMail($user->name));
         return redirect()->route('user.show' , $id) ; //here we need $user
     }
 
@@ -105,9 +109,20 @@ class usersController extends Controller
 
     public function destroy(string $id) // it will be used by admin
     {
-        $user = User::findOrFail($id) ;
-        $user->delete() ;
-        $user->save() ;        
+        
+        if(Auth::user()->is_admin || Auth::user()->user_id == $id ){
+            $user = User::findOrFail($id) ;            
+            $user->delete() ;
+            Mail::to($user->email)->send(new DeleteAccountMail($user));
+            if(Auth::user()->is_admin ){
+                return redirect()->route('user.usersList')->with(['deleted_success' => 'the account deleted succesfuly']) ;
+            }else{
+                Auth::logout() ;
+                return redirect('/')->with(['deleted_success' => 'the account deleted succesfuly']);
+            }
+        }else{
+            return redirect()->back()->with(['deleted_error' => 'you don\'t have the right to delete this account ']); 
+        }
     }
 
     public function LoginFrom(Request $request)

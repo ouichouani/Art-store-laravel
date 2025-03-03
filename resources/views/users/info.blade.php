@@ -2,6 +2,8 @@
 
 @section('content')
 
+<p style="background-color : rgb(128, 58, 0)">{{session('deleted_error')}}</p>
+
 <div class="user_info_container">
     <img src="{{asset( 'img/'. $user->img)}}" alt="profaile" style="height: 100px" >
     <table>
@@ -35,6 +37,12 @@
             {{-- <td>{{$user->bio ? "admin" : "user" }}</td> --}}
         </tr>
     </table>
+
+    <form action="{{route('user.destroy' , $user->user_id)}}" method="POST">
+        @csrf
+        @method('delete')
+        <button type="submit">delete account</button>
+    </form>
 
 </div>
 
